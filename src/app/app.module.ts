@@ -8,6 +8,11 @@ import { LicenceComponent } from './admin/licence/licence.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { SignupComponent } from './admin/signup/signup.component';
+import { LoginComponent } from './admin/login/login.component';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { ToastrModule, provideToastr } from 'ngx-toastr';
+import { ToastService } from './toastrService.service';
 
 @NgModule({
   declarations: [
@@ -16,13 +21,21 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     LicenceComponent,
     UserManagementComponent,
     UserListComponent,
+    SignupComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

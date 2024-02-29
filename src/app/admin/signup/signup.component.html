@@ -1,0 +1,30 @@
+
+<b>
+    Sign Up Here
+</b>
+
+<form [formGroup]="adminSignupForm">
+    <input type="text" formControlName="UserName" placeholder="Enter Username or Email">
+
+    <span class="validation-alerts"
+        *ngIf="adminSignupForm.get('UserName')?.invalid && adminSignupForm.get('UserName')?.touched">
+        Username invalid.
+    </span>
+
+    <input type="password" formControlName="Password" placeholder="Enter Password">
+
+    <span class="validation-alerts"
+        *ngIf="adminSignupForm.get('Password')?.invalid && adminSignupForm.get('Password')?.touched">
+        Password invalid.
+    </span>
+    <input type="password" formControlName="ConfirmPassword" placeholder="Confirm Password">
+
+    <span class="validation-alerts"
+        *ngIf="adminSignupForm.get('ConfirmPassword')?.invalid && adminSignupForm.get('ConfirmPassword')?.touched">
+        Password invalid.
+    </span>
+    
+
+    <button class="form-btn" (click)="adminSignupFormSubmission()">Submit</button>
+</form>
+

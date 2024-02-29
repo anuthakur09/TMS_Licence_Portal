@@ -1,0 +1,23 @@
+<b>
+    Login as admin user
+</b>
+
+<form [formGroup]="adminForm">
+    <input type="text" formControlName="UserName" placeholder="Enter Username or Email">
+
+    <span class="validation-alerts"
+        *ngIf="adminForm.get('UserName')?.invalid && adminForm.get('UserName')?.touched">
+        Username invalid.
+    </span>
+
+    <input type="password" formControlName="Password" placeholder="Enter Password">
+
+    <span class="validation-alerts"
+        *ngIf="adminForm.get('Password')?.invalid && adminForm.get('Password')?.touched">
+        Password invalid.
+    </span>
+    
+
+    <button class="form-btn" (click)="adminFormSubmission()">Submit</button>
+</form>
+

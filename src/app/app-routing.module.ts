@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: 'userlist', component: UserListComponent}
 ];
 
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

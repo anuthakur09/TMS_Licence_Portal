@@ -103,8 +103,18 @@ form input {
     border: none;
 }
 
-.form-btn:hover{
+.form-btn:hover {
     background-color: rgb(155, 170, 170);
     cursor: pointer;
 }
 
+.validation-alerts {
+    color: red;
+}
+
+.form-footer{
+    display: flex;
+    flex-direction: column;
+    height: 5rem;
+    justify-content: space-evenly;
+}

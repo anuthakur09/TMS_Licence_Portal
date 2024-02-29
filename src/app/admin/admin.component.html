@@ -31,33 +31,20 @@
 
         </div>
         <div class="left-column">
+            <div *ngIf="page == 'login'" style="height: 50%;">
+                <app-login></app-login>
+                <div class="form-footer">
+                    <a>Forgot Password?</a>
+                    <span>New User? <a style="color: navy; cursor: pointer;" (click)="handleRegistration('signup')">Sign Up</a> </span>
+                </div>
+            </div>
 
-            <b>
-                Login as admin user
-            </b>
-
-            <form [formGroup]="adminForm">
-                <input type="text" formControlName="UserName" placeholder="Enter Username or Email">
-
-                <span class="validation-alerts"
-                    *ngIf="adminForm.get('UserName')?.invalid && adminForm.get('UserName')?.touched">
-                    Username invalid.
-                </span>
-
-                <input type="password" formControlName="Password" placeholder="Enter Password">
-
-                <span class="validation-alerts"
-                    *ngIf="adminForm.get('Password')?.invalid && adminForm.get('Password')?.touched">
-                    Password invalid.
-                </span>
-                
-
-                <button class="form-btn" (click)="adminFormSubmission()">Submit</button>
-            </form>
-
-            <p>
-                Forgot Password?
-            </p>
+            <div *ngIf="page == 'signup'" style="height: 50%;">
+                <app-signup></app-signup>
+                <div class="form-footer">
+                    <span>Already have an account? <a style="color: navy; cursor: pointer;" (click)="handleRegistration('login')">Log In</a> </span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
