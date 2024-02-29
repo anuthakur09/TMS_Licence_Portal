@@ -1,0 +1,63 @@
+<div class="main-container">
+
+    <div class="logo-container">
+        <div class="logo">
+            <div class="blue-circle circle">
+
+            </div>
+            <div class="green-circle circle">
+
+            </div>
+            <div class="yellow-circle circle">
+
+            </div>
+            <div class="red-circle circle">
+
+            </div>
+        </div>
+
+
+        <div class="company-name">
+            <h3>Temperature Monitoring System</h3>
+        </div>
+    </div>
+
+
+    <div class="form-container">
+        <div class="right-column">
+            <img draggable="false" src="../../assets/images/login-concept-illustration_114360-739.avif" alt="">
+        </div>
+        <div class="center-column">
+
+        </div>
+        <div class="left-column">
+
+            <b>
+                Login as admin user
+            </b>
+
+            <form [formGroup]="adminForm">
+                <input type="text" formControlName="UserName" placeholder="Enter Username or Email">
+
+                <span class="validation-alerts"
+                    *ngIf="adminForm.get('UserName')?.invalid && adminForm.get('UserName')?.touched">
+                    Username invalid.
+                </span>
+
+                <input type="password" formControlName="Password" placeholder="Enter Password">
+
+                <span class="validation-alerts"
+                    *ngIf="adminForm.get('Password')?.invalid && adminForm.get('Password')?.touched">
+                    Password invalid.
+                </span>
+                
+
+                <button class="form-btn" (click)="adminFormSubmission()">Submit</button>
+            </form>
+
+            <p>
+                Forgot Password?
+            </p>
+        </div>
+    </div>
+</div>

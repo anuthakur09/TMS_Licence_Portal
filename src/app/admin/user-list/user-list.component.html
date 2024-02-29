@@ -1,0 +1,84 @@
+<a routerLink="/"><img class="previous-icon" src="../../../assets/images/previous.png" alt=""></a>
+
+<div class="row user-row">
+    <h2>Users list</h2>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Create New User
+    </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Creating New User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Enter user name">
+                <input type="text" placeholder="Field2">
+                <input type="text" placeholder="Field3">
+                <input type="text" placeholder="Field4">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main style="overflow-x: auto;">
+    <table>
+        <tr class="table-heading">
+            <th>#</th>
+            <th>User</th>
+            <th>User role</th>
+            <th>Action</th>
+            <th>User licences</th>
+        </tr>
+
+        <tr>
+            <td>1.</td>
+            <td>user1</td>
+            <td>xyz</td>
+            <td class="action">
+                <img src="../../../assets/images/edit.png" class="act-icon" alt="">
+                <img src="../../../assets/images/delete.png" class="act-icon" alt="">
+            </td>
+            <td><button class="btn licence-btn" routerLink="/licence">View</button></td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>user2</td>
+            <td>xyz</td>
+            <td class="action">
+                <img src="../../../assets/images/edit.png" class="act-icon" alt="">
+                <img src="../../../assets/images/delete.png" class="act-icon" alt="">
+            </td>
+            <td><button class="btn licence-btn" routerLink="/licence">View</button></td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>user3</td>
+            <td>xyz</td>
+            <td class="action">
+                <img src="../../../assets/images/edit.png" class="act-icon" alt="">
+                <img src="../../../assets/images/delete.png" class="act-icon" alt="">
+            </td>
+            <td><button class="btn licence-btn" routerLink="/licence">View</button></td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td>user4</td>
+            <td>xyz</td>
+            <td class="action">
+                <img src="../../../assets/images/edit.png" class="act-icon" alt="">
+                <img src="../../../assets/images/delete.png" class="act-icon" alt="">
+            </td>
+            <td><button class="btn licence-btn" routerLink="/licence">View</button></td>
+        </tr>
+
+    </table>
+</main>
