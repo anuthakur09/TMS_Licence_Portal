@@ -1,5 +1,5 @@
 <b>
-    Login as admin user
+    Login as admin user 
 </b>
 
 <form [formGroup]="adminForm">
@@ -16,8 +16,7 @@
         *ngIf="adminForm.get('Password')?.invalid && adminForm.get('Password')?.touched">
         Password invalid.
     </span>
-    
 
     <button class="form-btn" (click)="adminFormSubmission()">Submit</button>
+    
 </form>
-

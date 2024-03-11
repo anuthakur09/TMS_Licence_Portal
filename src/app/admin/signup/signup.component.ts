@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -21,12 +21,10 @@ export class SignupComponent {
     })
   }
   adminSignupFormSubmission() {
-    debugger
     if (this.adminSignupForm.valid) {
       let pass = this.adminSignupForm.get('Password')?.value
-      let cpass =this.adminSignupForm.get('ConfirmPassword')?.value
-      if (pass == cpass ) {
-        console.log('true')
+      let cpass = this.adminSignupForm.get('ConfirmPassword')?.value
+      if (pass == cpass) {
         this.router.navigate(['/usermanagement']);
       }
     }

@@ -19,7 +19,7 @@ export class ToastService {
   }
 
   error(textOrTpl: string | TemplateRef<any>): void {
-    debugger;
+    
     this.toasts.push({
       textOrTpl,
       classname: 'bg-danger text-light',

@@ -13,6 +13,9 @@ import { LoginComponent } from './admin/login/login.component';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { ToastService } from './toastrService.service';
+import { HttpClientModule } from "@angular/common/http";
+
+
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { ToastService } from './toastrService.service';
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',

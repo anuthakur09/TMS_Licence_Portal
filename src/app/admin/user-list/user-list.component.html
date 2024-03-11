@@ -2,35 +2,14 @@
 
 <div class="row user-row">
     <h2>Users list</h2>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
         Create New User
     </button>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Creating New User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <input type="text" placeholder="Enter user name">
-                <input type="text" placeholder="Field2">
-                <input type="text" placeholder="Field3">
-                <input type="text" placeholder="Field4">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <main style="overflow-x: auto;">
     <table>
+
         <tr class="table-heading">
             <th>#</th>
             <th>User</th>
@@ -39,46 +18,91 @@
             <th>User licences</th>
         </tr>
 
-        <tr>
-            <td>1.</td>
-            <td>user1</td>
-            <td>xyz</td>
+        <tr *ngFor="let item of data; let i = index;">
+            <td>{{i+1}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.role}}</td>
             <td class="action">
-                <img src="../../../assets/images/edit.png" class="act-icon" alt="">
-                <img src="../../../assets/images/delete.png" class="act-icon" alt="">
+                <a (click)="openEditEntryModal(i)" style="cursor: pointer;" data-bs-toggle="modal"
+                    data-bs-target="#editModal">
+                    <img src="../../../assets/images/edit.png" class="act-icon" alt="">
+                </a>
+                <a data-bs-toggle="modal" (click)="openDeleteEntryModal(i)" style="cursor: pointer;"
+                    data-bs-target="#deleteUserModal">
+                    <img src="../../../assets/images/delete.png" class="act-icon" alt="">
+                </a>
             </td>
-            <td><button class="btn licence-btn" routerLink="/licence">View</button></td>
-        </tr>
-        <tr>
-            <td>2.</td>
-            <td>user2</td>
-            <td>xyz</td>
-            <td class="action">
-                <img src="../../../assets/images/edit.png" class="act-icon" alt="">
-                <img src="../../../assets/images/delete.png" class="act-icon" alt="">
-            </td>
-            <td><button class="btn licence-btn" routerLink="/licence">View</button></td>
-        </tr>
-        <tr>
-            <td>3.</td>
-            <td>user3</td>
-            <td>xyz</td>
-            <td class="action">
-                <img src="../../../assets/images/edit.png" class="act-icon" alt="">
-                <img src="../../../assets/images/delete.png" class="act-icon" alt="">
-            </td>
-            <td><button class="btn licence-btn" routerLink="/licence">View</button></td>
-        </tr>
-        <tr>
-            <td>4.</td>
-            <td>user4</td>
-            <td>xyz</td>
-            <td class="action">
-                <img src="../../../assets/images/edit.png" class="act-icon" alt="">
-                <img src="../../../assets/images/delete.png" class="act-icon" alt="">
-            </td>
-            <td><button class="btn licence-btn" routerLink="/licence">View</button></td>
+            <td><button class="btn licence-btn" (click)="viewLicence(i)" routerLink="/licence">View</button></td>
         </tr>
 
     </table>
+
 </main>
+
+
+<!-- edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" [formGroup]="userForm">
+                <input type="text" formControlName="name" placeholder="Enter user name">
+                <input type="text" formControlName="role" placeholder="Enter user role">
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editEntry()">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add user Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Creating New User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="modal-body" [formGroup]="userForm">
+
+                <input type="text" formControlName="name" placeholder="Enter user name">
+                <input type="text" formControlName="role" placeholder="Enter user role">
+
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="createEntry()"
+                    data-bs-dismiss="modal">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete-confirmation Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h4>Do you really want to delete this user?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                    (click)="deleteEntry()">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
