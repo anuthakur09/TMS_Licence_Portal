@@ -14,6 +14,7 @@ import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-br
 import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { ToastService } from './toastrService.service';
 import { HttpClientModule } from "@angular/common/http";
+import {   NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 
 
@@ -33,11 +34,7 @@ import { HttpClientModule } from "@angular/common/http";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ToastrModule.forRoot({
-      timeOut: 3000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-    }),
+    NgbModule,
   ],
   providers: [ ],
   bootstrap: [AppComponent]

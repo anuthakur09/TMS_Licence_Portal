@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Environment } from "../environment";
 import { HttpClient } from "@angular/common/http";
+import { IUser } from '../models/userModel';
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ServiceService {
-  apiUrl = `${Environment.appBaseURL}api/KeyType`;
+  apiUrl = `${Environment.appBaseURL}api/Users`;
   rawData: any = [
     { id: 1, name: "Hero1", role: "Super Strength" },
     { id: 2, name: "Hero2", role: "Telekinesis" },
@@ -17,22 +19,14 @@ export class ServiceService {
 
   }
 
-  getHeroes() {
-    return this.rawData;
+  createData(data: IUser) {
+    debugger;
+    return this.http.post(this.apiUrl, data);
+    // this.rawData.push(data);
   }
 
-  saveCredentials(uName: string, pass: string) {
-    localStorage.setItem("User Name", uName);
-    localStorage.setItem("Password", pass);
-  }
-
-  createData(data: any) {
-    // return this.http.post(this.apiUrl, data);
-    this.rawData.push(data);
-  }
-
-  getAllEntries() {
-    return this.http.get(this.apiUrl);
+  getAllEntries(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
   }
 
   updateEntry(id: number) {
@@ -53,6 +47,6 @@ export class ServiceService {
     });
 
   }
-  
+
 
 }

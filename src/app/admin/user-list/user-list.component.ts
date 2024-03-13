@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/service/service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { NgbModal, NgbModalOptions } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule, NgbModalOptions, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { LicenceComponent } from '../licence/licence.component';
 
 
@@ -23,21 +23,24 @@ export class UserListComponent implements OnInit {
     ariaLabelledBy: 'ProjectLocation'
   };
 
-  constructor(private _service: ServiceService, private fb: FormBuilder, public modalService : NgbModal) {
+  constructor(private _service: ServiceService, private fb: FormBuilder, public modalService: NgbModal) {
     this.userForm = this.fb.group({
       id: new FormControl(),
-      name: new FormControl("", [Validators.required, Validators.email,]),
-      role: new FormControl("", [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/)]),
+      name: new FormControl("", [Validators.required]),
+      email: new FormControl("", [Validators.required, Validators.email]),
+      password: new FormControl("", [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/)]),
+      phone: new FormControl("", [Validators.required, Validators.minLength(10)]),
     })
   }
 
   ngOnInit(): void {
     this.retrieveData();
-    console.log(this.data);
   }
 
   retrieveData() {
-    this.data = this._service.getHeroes();
+    this._service.getAllEntries().subscribe((Data) => {
+      this.data = Data;
+    })
   }
 
   editEntry() {
@@ -68,16 +71,24 @@ export class UserListComponent implements OnInit {
   }
 
   createEntry() {
+    debugger;
     let obj1 = {
-      id: null,
+      id: 0,
       name: '',
-      role: ''
+      password: '',
+      email: '',
+      phone: ''
     };
-    let len = this._service.rawData.length;
-    obj1.id = len + 1;
+    
     obj1.name = this.userForm.get('name')?.value;
-    obj1.role = this.userForm.get('role')?.value;
-    this._service.createData(obj1);
+    obj1.password = this.userForm.get('password')?.value;
+    obj1.email = this.userForm.get('email')?.value;
+    obj1.phone = this.userForm.get('phone')?.value;
+    
+    this._service.createData(obj1).subscribe((response) => {
+      console.log(response);
+    });
+    
     this.userForm.reset();
   }
 
@@ -96,8 +107,8 @@ export class UserListComponent implements OnInit {
         this._service.deleteEntry(this.deleteId);
       }
     });
-
   }
+  
   viewLicence(id: number) {
     debugger;
     const modalRef = this.modalService.open(LicenceComponent, this.ngbModalOptions);
@@ -110,5 +121,3 @@ export class UserListComponent implements OnInit {
   }
 
 }
-
-

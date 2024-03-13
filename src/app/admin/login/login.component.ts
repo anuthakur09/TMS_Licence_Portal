@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
 
   retrieveData() {
     // this._service.getAllEntries();
-    this.data = this._service.getHeroes();
   }
 
   adminFormSubmission() {
@@ -46,11 +45,10 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/usermanagement']);
       let val1 = this.adminForm.get('UserName')?.value;
       let val2 = this.adminForm.get('Password')?.value;
-      this._service.saveCredentials(val1, val2);
       var obj1={
         title: "testanu"
       }
-      this._service.createData(obj1);
+      // this._service.createData(obj1);
 
     } else {
       console.log("Something is missing");
