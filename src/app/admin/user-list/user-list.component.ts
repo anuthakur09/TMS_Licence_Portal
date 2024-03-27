@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from 'src/app/service/service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { NgbModule, NgbModalOptions, NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { LicenceComponent } from '../licence/licence.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,20 +15,20 @@ export class UserListComponent implements OnInit {
   data: any[] = [];
   deleteId: number = 0;
   nameOfUser: string = '';
-  public ngbModalOptions: NgbModalOptions = {
-    backdrop: 'static',
-    keyboard: false,
-    size: 'lg',
-    ariaLabelledBy: 'ProjectLocation'
-  };
 
-  constructor(private _service: ServiceService, private fb: FormBuilder, public modalService: NgbModal) {
+ 
+  constructor(
+    private _service: ServiceService,
+    private fb: FormBuilder,
+    public _router: Router
+  ) {
     this.userForm = this.fb.group({
       id: new FormControl(),
       name: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/)]),
       phone: new FormControl("", [Validators.required, Validators.minLength(10)]),
+      role: new FormControl("", [Validators.required])
     })
   }
 
@@ -38,8 +37,10 @@ export class UserListComponent implements OnInit {
   }
 
   retrieveData() {
+    debugger;
     this._service.getAllEntries().subscribe((Data) => {
       this.data = Data;
+      console.log(this.data);
     })
   }
 
@@ -47,22 +48,34 @@ export class UserListComponent implements OnInit {
     let obj1 = {
       id: 0,
       name: '',
-      role: ''
+      password: '',
+      email: '',
+      phone: '',
+      role: '',
     };
 
     obj1.id = this.userForm.get('id')?.value;
     obj1.name = this.userForm.get('name')?.value;
+    obj1.email = this.userForm.get('email')?.value;
+    obj1.password = this.userForm.get('password')?.value;
+    obj1.phone = this.userForm.get('phone')?.value;
     obj1.role = this.userForm.get('role')?.value;
-    this._service.sample(obj1.id, obj1);
+    this._service.updateEntry(obj1).subscribe((Response) => {
+      console.log(Response);
+    })
+
     this.userForm.reset();
   }
 
   openEditEntryModal(id: number) {
     this.data.forEach(element => {
-      if (id + 1 == element.id) {
+      if (id == element.id) {
         this.userForm.patchValue({
           id: element.id,
           name: element.name,
+          email: element.email,
+          phone: element.phone,
+          password: element.password,
           role: element.role
         })
       }
@@ -71,24 +84,26 @@ export class UserListComponent implements OnInit {
   }
 
   createEntry() {
-    debugger;
     let obj1 = {
       id: 0,
       name: '',
       password: '',
       email: '',
-      phone: ''
+      phone: '',
+      role: ''
     };
-    
+
     obj1.name = this.userForm.get('name')?.value;
     obj1.password = this.userForm.get('password')?.value;
     obj1.email = this.userForm.get('email')?.value;
     obj1.phone = this.userForm.get('phone')?.value;
-    
+    obj1.role = this.userForm.get('role')?.value;
+
     this._service.createData(obj1).subscribe((response) => {
       console.log(response);
+      this.retrieveData();
     });
-    
+
     this.userForm.reset();
   }
 
@@ -102,22 +117,13 @@ export class UserListComponent implements OnInit {
   }
 
   deleteEntry() {
-    this.data.forEach(element => {
-      if (this.deleteId == element.id) {
-        this._service.deleteEntry(this.deleteId);
-      }
-    });
+    this._service.deleteEntry(this.deleteId).subscribe((Response) => {
+      console.log(Response);
+    })
   }
-  
+
   viewLicence(id: number) {
-    debugger;
-    const modalRef = this.modalService.open(LicenceComponent, this.ngbModalOptions);
-    modalRef.componentInstance.userId = id;
-    modalRef.result.then((x: any) => {
-      if (x) {
-        this.retrieveData();
-      }
-    });
+    this._router.navigate(['/licence', id]);
   }
 
 }

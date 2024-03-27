@@ -2,9 +2,26 @@ h2 {
     font-weight: 600;
     color: navy;
 }
-.previous-icon{
+
+.previous-icon {
     height: 2rem;
     width: 2rem;
+}
+
+.user-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.user-row h2 {
+    font-weight: 600;
+    color: navy;
+    width: fit-content;
+}
+
+.user-row button {
+    width: fit-content;
 }
 
 header {
@@ -17,7 +34,6 @@ header {
     border-radius: 15px;
     display: flex;
     justify-content: space-around;
-    // margin-top: 20px;
 }
 
 .wdh-33 {
@@ -85,7 +101,6 @@ table {
     background-color: navy !important;
     color: white;
     height: 2rem;
-
 }
 
 td {
@@ -98,7 +113,35 @@ td {
     width: 3rem;
 }
 
-
 tr:nth-child(odd) {
-    background-color: #ddd
+    background-color: #ddd;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.modal-title {
+    font-weight: 500;
+}
+
+.modal-body input {
+    width: 13rem;
+    margin: auto;
+    border: none;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.act-icon {
+    height: 1.2rem;
+    width: 1.2rem;
+    margin: 5px;
+}
+
+.action {
+    display: flex;
+    justify-content: flex-start;
 }

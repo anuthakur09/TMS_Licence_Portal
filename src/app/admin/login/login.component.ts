@@ -41,17 +41,7 @@ export class LoginComponent implements OnInit {
 
   adminFormSubmission() {
     if (this.adminForm.valid) {
-      
       this.router.navigate(['/usermanagement']);
-      let val1 = this.adminForm.get('UserName')?.value;
-      let val2 = this.adminForm.get('Password')?.value;
-      var obj1={
-        title: "testanu"
-      }
-      // this._service.createData(obj1);
-
-    } else {
-      console.log("Something is missing");
     }
   }
 

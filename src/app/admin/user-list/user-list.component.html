@@ -7,17 +7,21 @@
     </button>
 </div>
 
+
 <main style="overflow-x: auto;">
     <table>
 
         <tr class="table-heading">
+            
             <th>#</th>
             <th>User</th>
             <th>Email</th>
             <th>Phone</th>
             <th>Password</th>
+            <th>Role</th>
             <th>Action</th>
             <th>View Licence</th>
+
         </tr>
 
         <tr *ngFor="let item of data; let i = index;">
@@ -26,17 +30,18 @@
             <td>{{item.email}}</td>
             <td>{{item.phone}}</td>
             <td>{{item.password}}</td>
+            <td>{{item.role}}</td>
             <td class="action">
-                <a (click)="openEditEntryModal(i)" style="cursor: pointer;" data-bs-toggle="modal"
+                <a (click)="openEditEntryModal(item.id)" style="cursor: pointer;" data-bs-toggle="modal"
                     data-bs-target="#editModal">
                     <img src="../../../assets/images/edit.png" class="act-icon" alt="">
                 </a>
-                <a data-bs-toggle="modal" (click)="openDeleteEntryModal(i)" style="cursor: pointer;"
+                <a data-bs-toggle="modal" (click)="openDeleteEntryModal(item.id)" style="cursor: pointer;"
                     data-bs-target="#deleteUserModal">
                     <img src="../../../assets/images/delete.png" class="act-icon" alt="">
                 </a>
             </td>
-            <td><button class="btn licence-btn" (click)="viewLicence(i)" routerLink="/licence">View</button></td>
+            <td><button class="btn licence-btn" (click)="viewLicence(item.id)" routerLink="/licence">View</button></td>
         </tr>
 
     </table>
@@ -54,6 +59,9 @@
             </div>
             <div class="modal-body" [formGroup]="userForm">
                 <input type="text" formControlName="name" placeholder="Enter user name">
+                <input type="text" formControlName="email" placeholder="Enter user email">
+                <input type="tel" formControlName="phone" placeholder="Enter phone number">
+                <input type="password" formControlName="password" placeholder="Enter password">
                 <input type="text" formControlName="role" placeholder="Enter user role">
             </div>
             <div class="modal-footer">
@@ -80,6 +88,7 @@
                 <input type="email" formControlName="email" placeholder="Enter email">
                 <input type="tel" formControlName="phone" placeholder="Enter phone number">
                 <input type="password" formControlName="password" placeholder="Enter password">
+                <input type="text" formControlName="role" placeholder="Enter user role">
 
             </form>
             <div class="modal-footer">
@@ -100,7 +109,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h4>Do you really want to delete this user?</h4>
+
+                <h4>Do you really want to delete this user: {{this.nameOfUser}}</h4>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

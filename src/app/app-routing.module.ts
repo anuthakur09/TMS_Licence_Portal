@@ -8,7 +8,7 @@ import { UserListComponent } from './admin/user-list/user-list.component';
 const routes: Routes = [
   { path: '', component: AdminComponent },
   { path: 'usermanagement', component: UserManagementComponent },
-  { path: 'licence', component: LicenceComponent },
+  { path: 'licence/:id', component: LicenceComponent },
   {path: 'userlist', component: UserListComponent}
 ];
 

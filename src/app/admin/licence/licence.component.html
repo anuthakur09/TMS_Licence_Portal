@@ -3,30 +3,114 @@
         <h1>Temperature Monitoring System Admin</h1>
         <p>Welcome, User1</p>
     </header>
-    
+
     <a routerLink="/usermanagement">
         <img class="previous-icon" src="../../../assets/images/previous.png" alt="">
     </a>
-  
-    <h2>User Licences</h2>
+    
+    <div class="row user-row">
+        <h2>Licences</h2>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLicence">
+            Add Licence
+        </button>
+    </div>
 
     <main style="overflow-x: auto;">
         <table>
             <tr class="table-heading">
                 <th>Licence key</th>
-                <th>User Id</th>
+                <th>User Name</th>
                 <th>Issue date</th>
                 <th>Expiry date</th>
                 <th>licenceKeyType</th>
+                <th>Devices</th>
             </tr>
 
-            <tr *ngFor="let item of data; let i= index;">
-                <td>{{item.id + 1}}</td>
-                <td>{{item.userId}}</td>
+            <tr *ngFor="let item of filteredLicences; let i= index;">
+                <td>{{item.id }}</td>
+                <td>{{this.userName}}</td>
                 <td>{{item.issueDate}}</td>
-                <td>{{item.expDate}}</td>
-                <td>{{item.licenceKeyType}}</td>
+                <td>{{item.expiryDate}}</td>
+                <td>{{ getSpecificKeyType(item.licenceKeyType) | json }}</td>
+                <td></td>
             </tr>
         </table>
     </main>
 </div>
+
+<!-- add user licence Modal -->
+<div class="modal fade" id="addLicence" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="licenceForm" class="modal-body">
+
+                <input type="date" formControlName="issueDate" placeholder="Enter Issue Date">
+                <input type="date" formControlName="expiryDate" placeholder="Enter Expiry Date">
+                <input type="number" formControlName="licenceKeyType" placeholder="Enter Licence Key Type">
+
+            </form>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="createUserLicence()"
+                    data-bs-dismiss="modal">Save</button>
+ 
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 
+
+Delete-confirmation Modal
+<div class="modal fade" id="deleteLicenceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <h4>Do you really want to delete this Licence</h4>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                    (click)="deleteLicence()">
+                    Delete
+                </button>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+edit Modal
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form class="modal-body" [formGroup]="licenceForm">
+                <input type="date" formControlName="issueDate" placeholder="Enter Issue Date">
+                <input type="date" formControlName="expiryDate" placeholder="Enter Expiry Date">
+                <input type="number" formControlName="licenceKeyType" placeholder="Enter Licence Key Type">
+            </form>
+
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeEditModal()">Close</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editLicence()">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div> -->
