@@ -1,18 +1,17 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from 'src/app/service/service.service';
 import { UserLicenceService } from 'src/app/service/user-licence.service';
-import { RandomStringGenerator } from "./macAddress";
+import { RandomStringGenerator } from "./macAddressGenerator";
 
 @Component({
-  selector: 'app-licence',
-  templateUrl: './licence.component.html',
-  styleUrls: ['./licence.component.scss']
+  selector: 'app-licenses',
+  templateUrl: './licenses.component.html',
+  styleUrls: ['./licenses.component.scss']
 })
-
-export class LicenceComponent implements OnInit {
+export class LicensesComponent {
   data: any = [];
   filteredLicences: any = [];
   userId: number = 0;
@@ -134,54 +133,3 @@ export class LicenceComponent implements OnInit {
     this.licenceForm.reset();
   }
 }
-
-
-// openDeleteEntryModal(id: number) {
-//   this.deleteLicenceId = id;
-// }
-
-// closeDeleteModal() {
-//   this.deleteLicenceId = 0;
-// }
-
-// deleteLicence() {
-//   this._licenceService.delete(this.deleteLicenceId).subscribe((Response) => {
-//     this.retrieveData();
-//   });
-// }
-
-// openEditEntryModal(id: any) {
-//   this.editLicenceId = id;
-
-//   this.data.forEach((element: any) => {
-//     if (id == element.id) {
-//       this.licenceForm.patchValue({
-//         licenceKeyType: element.licenceKeyType,
-//         issueDate: element.issueDate,
-//         expiryDate: element.expiryDate
-//       });
-//     }
-//   });
-// }
-
-// closeEditModal() {
-//   this.licenceForm.reset();
-// }
-
-// editLicence() {
-//   let obj1 = {
-//     id: this.editLicenceId,
-//     userId: this.userId,
-//     licenceKeyType: this.licenceForm.get('licenceKeyType')?.value,
-//     issueDate: new Date(this.licenceForm.get('issueDate')?.value),
-//     expiryDate: new Date(this.licenceForm.get('expiryDate')?.value),
-//   };
-
-//   this._licenceService.editUserLicence(obj1).subscribe((Response) => {
-//     this.retrieveData();
-//   });
-//   this.licenceForm.reset();
-//   this.editLicenceId = '';
-// }
-
-

@@ -7,7 +7,7 @@
     <a routerLink="/usermanagement">
         <img class="previous-icon" src="../../../assets/images/previous.png" alt="">
     </a>
-    
+
     <div class="row user-row">
         <h2>Licences</h2>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLicence">
@@ -31,8 +31,8 @@
                 <td>{{this.userName}}</td>
                 <td>{{item.issueDate}}</td>
                 <td>{{item.expiryDate}}</td>
-                <td>{{ getSpecificKeyType(item.licenceKeyType) | json }}</td>
-                <td></td>
+                <td>{{ getSpecificKeyType(item.licenceKeyType)}}</td>
+                <td>{{ getSpecificDevice(item.id) }}</td>
             </tr>
         </table>
     </main>
@@ -48,9 +48,14 @@
             </div>
             <form [formGroup]="licenceForm" class="modal-body">
 
-                <input type="date" formControlName="issueDate" placeholder="Enter Issue Date">
+                <!-- <input type="date" formControlName="issueDate" placeholder="Enter Issue Date">
                 <input type="date" formControlName="expiryDate" placeholder="Enter Expiry Date">
-                <input type="number" formControlName="licenceKeyType" placeholder="Enter Licence Key Type">
+                <input type="number" formControlName="licenceKeyType" placeholder="Enter Licence Key Type"> -->
+                <select name="keyType" id="kt" (change)="setLicenceType($event)">
+                    <option value="1006">Trial</option>
+                    <option value="1007">Standard</option>
+                    <option value="1008">Premium</option>
+                </select>
 
             </form>
             <div class="modal-footer">
@@ -58,7 +63,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" (click)="createUserLicence()"
                     data-bs-dismiss="modal">Save</button>
- 
+
             </div>
         </div>
     </div>

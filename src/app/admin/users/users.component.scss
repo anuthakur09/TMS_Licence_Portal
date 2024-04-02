@@ -1,0 +1,87 @@
+header {
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+.previous-icon {
+    height: 2rem;
+    width: 2rem;
+}
+
+.user-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.user-row h2 {
+    font-weight: 600;
+    color: navy;
+    width: fit-content;
+}
+
+.user-row button {
+    width: fit-content;
+}
+
+table {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.table-heading {
+    background-color: navy !important;
+    color: white;
+    height: 2rem;
+}
+
+.act-icon {
+    height: 1.2rem;
+    width: 1.2rem;
+    margin: 5px;
+}
+
+.action {
+    display: flex;
+    justify-content: flex-start;
+}
+
+td {
+    text-align: left;
+    height: 2rem;
+}
+
+th,
+td {
+    width: 3rem;
+}
+
+tr:nth-child(odd) {
+    background-color: #ddd;
+}
+
+.modal-body {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.modal-title {
+    font-weight: 500;
+}
+
+.modal-body input {
+    width: 13rem;
+    margin: auto;
+    border: none;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.licence-btn {
+    background-color: navy;
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-weight: 600;
+    color: white;
+}

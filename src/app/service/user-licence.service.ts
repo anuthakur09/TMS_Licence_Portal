@@ -9,7 +9,7 @@ import { Environment } from "../environment";
 export class UserLicenceService {
   apiurl = `${Environment.appBaseURL}api/LicenceKey`;
   keyTypeApiUrl = `${Environment.appBaseURL}api/KeyType`;
-  licenceDevicesUrl = `${Environment.appBaseURL}api/LicenceDevices/GetAllDevice`;
+  licenceDevicesUrl = `${Environment.appBaseURL}api/LicenceDevices`;
 
   constructor(
     private http: HttpClient,
@@ -34,7 +34,7 @@ export class UserLicenceService {
 
 
 
-// key type
+  // key type
   getKeyType() {
     return this.http.get(`${this.keyTypeApiUrl}/GetKeyType`);
   }
@@ -44,14 +44,14 @@ export class UserLicenceService {
   }
 
 
- 
+
   // devices
   getDevices() {
-    return this.http.get(this.licenceDevicesUrl);
+    return this.http.get(`${this.licenceDevicesUrl}/GetAllDevice`);
   }
 
-  newDevice(id: any){
-    this.http.post(this.licenceDevicesUrl, id);
+  newDevice(data: any) {
+    return this.http.post(this.licenceDevicesUrl, data);
   }
 
 }

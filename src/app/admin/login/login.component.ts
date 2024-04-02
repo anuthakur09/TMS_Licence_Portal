@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   adminFormSubmission() {
     if (this.adminForm.valid) {
-      this.router.navigate(['/usermanagement']);
+      this.router.navigate(['/users']);
     }
   }
 

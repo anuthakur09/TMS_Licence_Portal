@@ -25,7 +25,7 @@ export class SignupComponent {
       let pass = this.adminSignupForm.get('Password')?.value
       let cpass = this.adminSignupForm.get('ConfirmPassword')?.value
       if (pass == cpass) {
-        this.router.navigate(['/usermanagement']);
+        this.router.navigate(['/users']);
       }
     }
   }

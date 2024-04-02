@@ -15,6 +15,8 @@ import { ToastrModule, provideToastr } from 'ngx-toastr';
 import { ToastService } from './toastrService.service';
 import { HttpClientModule } from "@angular/common/http";
 import {   NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { UsersComponent } from './admin/users/users.component';
+import { LicensesComponent } from './admin/licenses/licenses.component';
 
 
 
@@ -27,6 +29,8 @@ import {   NgbModule } from "@ng-bootstrap/ng-bootstrap";
     UserListComponent,
     SignupComponent,
     LoginComponent,
+    UsersComponent,
+    LicensesComponent,
   ],
   imports: [
     BrowserModule,
