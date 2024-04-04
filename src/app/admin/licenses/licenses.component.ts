@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ServiceService } from 'src/app/service/service.service';
 import { UserLicenceService } from 'src/app/service/user-licence.service';
@@ -11,12 +9,12 @@ import { RandomStringGenerator } from "./macAddressGenerator";
   templateUrl: './licenses.component.html',
   styleUrls: ['./licenses.component.scss']
 })
+
 export class LicensesComponent {
   data: any = [];
   filteredLicences: any = [];
   userId: number = 0;
   userName: any;
-  licenceForm: FormGroup;
   deleteLicenceId = 0;
   editLicenceId = '';
   expDate: Date | undefined;
@@ -24,21 +22,14 @@ export class LicensesComponent {
   createdLicence: any;
   devices: any = [];
   macAd = '';
-  licenceType: any = 1006;
+  licenceType: any = 'Trial';
+  licenceKeyType: any;
 
   constructor(
     private _licenceService: UserLicenceService,
-    private http: HttpClient,
     private _activatedRoute: ActivatedRoute,
     private _userService: ServiceService,
-    private licenceFormBuilder: FormBuilder
-  ) {
-    this.licenceForm = this.licenceFormBuilder.group({
-      issueDate: new FormControl('', Validators.required),
-      licenceKeyType: new FormControl(0, Validators.required),
-      expiryDate: new FormControl('', Validators.required),
-    })
-  }
+  ) { }
 
   ngOnInit(): void {
     this._activatedRoute.params.subscribe((params) => {
@@ -47,7 +38,6 @@ export class LicensesComponent {
     this.retrieveDevices();
     this.retrieveLicenceTypes();
     this.retrieveData();
-    this.macAd = RandomStringGenerator.generateRandomString(17);
   }
 
   retrieveLicenceTypes() {
@@ -61,7 +51,7 @@ export class LicensesComponent {
       this.devices = Response;
     });
   }
-  
+
   getSpecificKeyType(Id: number) {
     const keyType = this.licenceTypes.find((type: any) => type.id === Id);
     return keyType ? keyType.title : 'Unknown';
@@ -75,6 +65,7 @@ export class LicensesComponent {
   }
 
   retrieveData() {
+    this.filteredLicences = [];
     this._licenceService.getUserLicences().subscribe((response) => {
       this.data = response;
       this.getUser();
@@ -93,43 +84,48 @@ export class LicensesComponent {
   }
 
   setLicenceType(e: any) {
-    debugger;
     this.licenceType = e.target?.value;
   }
 
   createUserLicence() {
     const today: Date = new Date();
     this.expDate = new Date(today);
-    let LicenceKeyType = this.licenceForm.get('licenceKeyType')?.value;
 
-    if (LicenceKeyType == 6) {
+    if (this.licenceType == 'Trial') {
       this.expDate.setDate(today.getDate() + 15);
-    } else if (LicenceKeyType == 7) {
+      this.licenceKeyType = 1009;
+    } else if (this.licenceType == 'Standard') {
       this.expDate.setDate(today.getDate() + 90);
-    } else if (LicenceKeyType == 8) {
+      this.licenceKeyType = 1010;
+    } else if (this.licenceType == 'Premium') {
       this.expDate.setDate(today.getDate() + 180);
+      this.licenceKeyType = 1011;
     }
 
     let obj1 = {
       userId: this.userId,
-      licenceKeyType: this.licenceType,
+      licenceKeyType: this.licenceKeyType,
       issueDate: today,
       expiryDate: this.expDate,
     }
 
-    debugger;
+    // Call one 
+    this.macAd = RandomStringGenerator.generateRandomString(17);
     this._licenceService.create(obj1).subscribe((Response) => {
       if (Response) {
         this.createdLicence = Response;
-        let obj2 = { LicenceKeyId: this.createdLicence.id, macAddress: this.macAd };
 
-        this._licenceService.newDevice(obj2).subscribe((Response) => {
-        })
+        let obj2 = {
+          LicenceKeyId: this.createdLicence.id,
+          macAddress: this.macAd
+        };
+
+        // Call two
+        this._licenceService.newDevice(obj2).subscribe();
 
         this.retrieveData();
+        this.retrieveDevices();
       }
     });
-
-    this.licenceForm.reset();
   }
 }

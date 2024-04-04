@@ -14,7 +14,6 @@
             </button>
         </div>
 
-
         <main style="overflow-x: auto;">
             <table>
 
@@ -32,15 +31,13 @@
                     <td>{{this.userName}}</td>
                     <td>{{item.issueDate}}</td>
                     <td>{{item.expiryDate}}</td>
-                    <td>{{ getSpecificKeyType(item.licenceKeyType)}}</td>
+                    <td>{{ getSpecificKeyType(item.licenceKeyType) }}</td>
                     <td>{{ getSpecificDevice(item.id) }}</td>
                 </tr>
 
             </table>
 
         </main>
-
-
 
         <!-- add user licence Modal -->
         <div class="modal fade" id="addLicence" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -50,15 +47,12 @@
                         <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form [formGroup]="licenceForm" class="modal-body">
+                    <form class="modal-body">
 
-                        <!-- <input type="date" formControlName="issueDate" placeholder="Enter Issue Date">
-                <input type="date" formControlName="expiryDate" placeholder="Enter Expiry Date">
-                <input type="number" formControlName="licenceKeyType" placeholder="Enter Licence Key Type"> -->
                         <select name="keyType" id="kt" (change)="setLicenceType($event)">
-                            <option value="1006">Trial</option>
-                            <option value="1007">Standard</option>
-                            <option value="1008">Premium</option>
+                            <option value="Trial">Trial</option>
+                            <option value="Standard">Standard</option>
+                            <option value="Premium">Premium</option>
                         </select>
 
                     </form>

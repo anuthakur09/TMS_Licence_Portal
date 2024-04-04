@@ -42,20 +42,14 @@ export class UsersComponent {
 
   editEntry() {
     let obj1 = {
-      id: 0,
-      name: '',
-      password: '',
-      email: '',
-      phone: '',
-      role: '',
+      id: this.userForm.get('id')?.value,
+      name: this.userForm.get('name')?.value,
+      password: this.userForm.get('password')?.value,
+      email: this.userForm.get('email')?.value,
+      phone: this.userForm.get('phone')?.value,
+      role: this.userForm.get('role')?.value,
     };
 
-    obj1.id = this.userForm.get('id')?.value;
-    obj1.name = this.userForm.get('name')?.value;
-    obj1.email = this.userForm.get('email')?.value;
-    obj1.password = this.userForm.get('password')?.value;
-    obj1.phone = this.userForm.get('phone')?.value;
-    obj1.role = this.userForm.get('role')?.value;
     this._service.updateEntry(obj1).subscribe((Response) => {
       console.log(Response);
     })
@@ -82,18 +76,12 @@ export class UsersComponent {
   createEntry() {
     let obj1 = {
       id: 0,
-      name: '',
-      password: '',
-      email: '',
-      phone: '',
-      role: ''
+      name: this.userForm.get('name')?.value,
+      password: this.userForm.get('password')?.value,
+      email: this.userForm.get('email')?.value,
+      phone: this.userForm.get('phone')?.value,
+      role: this.userForm.get('role')?.value
     };
-
-    obj1.name = this.userForm.get('name')?.value;
-    obj1.password = this.userForm.get('password')?.value;
-    obj1.email = this.userForm.get('email')?.value;
-    obj1.phone = this.userForm.get('phone')?.value;
-    obj1.role = this.userForm.get('role')?.value;
 
     this._service.createData(obj1).subscribe((response) => {
       console.log(response);
@@ -113,6 +101,7 @@ export class UsersComponent {
   }
 
   deleteEntry() {
+    debugger;
     this._service.deleteEntry(this.deleteId).subscribe((Response) => {
       console.log(Response);
     })

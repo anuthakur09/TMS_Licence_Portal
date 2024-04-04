@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
-import { ToastService } from 'src/app/toastrService.service';
 import { ServiceService } from "../../service/service.service";
 
 @Component({
@@ -10,7 +9,7 @@ import { ServiceService } from "../../service/service.service";
   styleUrls: ['./login.component.scss'],
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   heroes: number[] = [];
   adminForm: FormGroup;
 
@@ -19,7 +18,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private toastService: ToastService,
     private _service: ServiceService
   ) {
 
@@ -28,15 +26,6 @@ export class LoginComponent implements OnInit {
       Password: new FormControl("", [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/)]),
     })
 
-  }
-
-
-  ngOnInit(): void {
-    this.retrieveData();
-  }
-
-  retrieveData() {
-    // this._service.getAllEntries();
   }
 
   adminFormSubmission() {

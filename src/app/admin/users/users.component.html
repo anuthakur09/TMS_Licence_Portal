@@ -13,7 +13,6 @@
                 Create New User
             </button>
         </div>
- 
 
         <main style="overflow-x: auto;">
             <table>
@@ -28,7 +27,7 @@
                     <th>Role</th>
                     <th>Action</th>
                     <th>View Licence</th>
-
+ 
                 </tr>
 
                 <tr *ngFor="let item of data; let i = index;">
@@ -55,7 +54,6 @@
             </table>
 
         </main>
-
 
         <!-- edit Modal -->
         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -120,7 +118,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <h4>Do you really want to delete this user: {{this.nameOfUser}}</h4>
+                        <h5>Do you really want to delete this user: {{this.nameOfUser}}</h5>
 
                     </div>
                     <div class="modal-footer">
@@ -135,3 +133,4 @@
     </div>
 
 </div>
+
